@@ -21,7 +21,9 @@
     "verbose": true,
     "testEnvironment": "node",
     "collectCoverage": true,
-    "coveragePathIgnorePatterns": ["/__test__/"],
+    "coveragePathIgnorePatterns": [
+      "/__test__/"
+    ],
     "coverageDirectory": "./coverage",
     "coverageThreshold": {
       "global": {
@@ -46,5 +48,8 @@
     "nodemon": "^1.14.11",
     "superagent": "^3.8.2",
     "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
   }
 }

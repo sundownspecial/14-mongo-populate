@@ -30,7 +30,7 @@ module.exports = function(router) {
     })
     .delete((req, res) => {
       return Make.findByIdAndRemove(req.params._id)
-        .then((stuff) => res.status(200).json(stuff))
+        .then((stuff) => res.status(204).json(stuff))
         .catch(err => errorHandler(err, res));
     });
   // .put()
