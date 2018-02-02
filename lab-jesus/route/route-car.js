@@ -25,8 +25,9 @@ module.exports = function(router) {
     })
     .post(bodyParser, (req, res) => {
       console.log('yoooo');
+      console.log(req.body);
       new Car(req.body).save()
-        .then(track => res.status(201).json(track))
+        .then(car => res.status(201).json(car))
         .catch(err => errorHandler(err, res));
     })
     .put(bodyParser, (req, res) => {

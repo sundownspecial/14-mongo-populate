@@ -4,19 +4,23 @@
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
+const debug = require('debug')('http:server');
 const errorHandler = require('./error-handler');
 
 // Application setup
-const app = express();
 const PORT = process.env.PORT;
 const router = express.Router();
+const app = express();
 const MONGODB_URI = process.env.MONGODB_URI;
 // app.use(bodyParser) // Applies the package to every route in the app
-//Middlewarev
+//Middleware
 app.use(cors());
 app.use('/api/v1', router);
 require('../route/route-car')(router);
-app.use('/{0,}', (req, res) => errorHandler(new Error('Path Error. Route not found.'), res));
+require('../route/route-make')(router);
+
+//404
+app.all('/{0,}', (req, res) => errorHandler(new Error('Path Error. Route not found.'), res));
 
 // Route setup
 // require('../route/route-category')(router)
@@ -29,8 +33,8 @@ server.start = () => {
 
     server.http = app.listen(PORT, () => {
       console.log(`Listening on ${PORT}`);
-      server.isOn = true;
       server.db = mongoose.connect(MONGODB_URI);
+      server.isOn = true;
       return resolve(server);
     });
   });
